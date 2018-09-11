@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1060984082835",
+    "firebase_url": "https://uber-school.firebaseio.com",
+    "project_id": "uber-school",
+    "storage_bucket": "uber-school.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060984082835:android:da147ffff2e14323",
+        "android_client_info": {
+          "package_name": "com.example.eddie.uber_school"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060984082835-eli7f7sumkajpn4dpgpk48cb9n1f8pgr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.eddie.uber_school",
+            "certificate_hash": "a6f93a3b14884cfc2d8cc27015ef529451f469a1"
+          }
+        },
+        {
+          "client_id": "1060984082835-ooq31k7vkokmu6psng2h12a53be08qcq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHv7-KDue-xC4bwsRpwbNFh7xrKWId89c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060984082835-ooq31k7vkokmu6psng2h12a53be08qcq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
