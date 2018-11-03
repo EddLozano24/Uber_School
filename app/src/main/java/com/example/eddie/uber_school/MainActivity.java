@@ -2,6 +2,7 @@ package com.example.eddie.uber_school;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,13 +25,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editTextPassword;
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener listener;
+    private Typeface Ubuntu;
+    private Typeface UbuntuBold;
+    private TextView titulo;
     ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        String fuente1 = "fonts/Ubuntu-Regular.ttf";
+        String fuente2 = "fonts/Ubuntu-Bold.ttf";
+        this.UbuntuBold = Typeface.createFromAsset(getAssets(), fuente2);
+        this.Ubuntu = Typeface.createFromAsset(getAssets(), fuente1);
+        titulo = (TextView) findViewById(R.id.titulo);
+        titulo.setTypeface(UbuntuBold);
         tv_registrar = (TextView) findViewById(R.id.tv_registrar);
         btn_sesion = (Button) findViewById(R.id.btn_sesion);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);

@@ -4,27 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/design_default_color_primary"
     android:orientation="vertical"
+    android:textColor="#fff"
     tools:context=".Principal">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Bienvenido a Uber School"
-        android:textSize="30sp"
+        android:textColor="#fff"
+        android:id="@+id/titulo"
+        android:textStyle="italic"
+        android:layout_margin="15px"
+        android:textSize="40px"
         />
 
     <TextView
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#fff"
         android:text="Lista de Alumnos"
-        android:textSize="20sp"
+        android:layout_margin="15px"
+        android:textSize="35px"
         />
     
     <ListView
         android:id="@+id/ListView"
         android:layout_width="match_parent"
+        android:textColor="#fff"
         android:layout_height="wrap_content"
         />
 

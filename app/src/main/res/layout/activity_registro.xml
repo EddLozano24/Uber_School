@@ -5,13 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/design_default_color_primary"
     tools:context=".Registro">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registrate para utilizar nuestra aplicacion"
-        android:textSize="15sp"
+        android:text="Registrate para poder utilizar nuestra aplicacion"
+        android:textSize="35px"
+        android:layout_margin="15px"
+        android:textColor="#fff"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center"
         />
@@ -21,6 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="E-mail"
+        android:padding="20px"
+        android:layout_margin="20px"
         android:inputType="textEmailAddress"/>
         />
 
@@ -29,6 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
+        android:padding="20px"
+        android:layout_margin="20px"
         android:inputType="textPassword"
         />
 
@@ -36,7 +43,10 @@
         android:id="@+id/buttonRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/boton_redondo"
         android:text="Registrar"
+        android:textColor="#fff"
+        android:padding="20px"
         android:layout_gravity="center"
         />
 
