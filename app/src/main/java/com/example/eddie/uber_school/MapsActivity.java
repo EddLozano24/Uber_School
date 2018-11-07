@@ -60,7 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Double lon = dataSnapshot.child("Longitud").getValue(Double.class);
                 LatLng sydney = new LatLng(lat, lon);
                 mMap.addMarker(new MarkerOptions().position(sydney).title("Ubicacion de "+nombre));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
             }
 
             @Override

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".MainActivity"
     android:orientation="vertical">
 
@@ -19,6 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Correo"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:inputType="textEmailAddress"
         />
 
@@ -27,6 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:inputType="textPassword"
         />
 
@@ -45,6 +50,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:text="Registrar"
+        android:textColor="@android:color/white"
         android:textSize="20sp" />
 
 </LinearLayout>

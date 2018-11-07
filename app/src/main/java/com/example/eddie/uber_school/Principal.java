@@ -1,14 +1,20 @@
 package com.example.eddie.uber_school;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.eddie.uber_school.Objetos.References;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +29,10 @@ public class Principal extends AppCompatActivity{
     ListView Lista;
     ArrayList<String> Arreglo =new ArrayList<>();
 
+    private FirebaseAuth.AuthStateListener mAuth;
+
+    private Button mout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,16 +40,30 @@ public class Principal extends AppCompatActivity{
 
         final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child(References.REFERENCIA);
 
+        mout = (Button) findViewById(R.id.logout);
+
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Arreglo);
-        ListView Lista = findViewById(R.id.ListView);
+        final ListView Lista = findViewById(R.id.ListView);
         Lista.setAdapter(adapter);
+        //Lista.setOnItemClickListener(this);
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String myValues = dataSnapshot.getKey();
-                Arreglo.add(myValues);
+                final String name = dataSnapshot.getKey();
+                Arreglo.add(name);
                 adapter.notifyDataSetChanged();
+                Lista.setAdapter(adapter);
+
+                Lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        final String referencia = (String) Lista.getItemAtPosition(position).toString();
+                        Intent intentextras = new Intent(Principal.this, MapsActivity.class);
+                        intentextras.putExtra("NOMBRE", referencia);
+                        startActivity(intentextras);
+                    }
+                });
             }
 
             @Override
@@ -63,21 +87,42 @@ public class Principal extends AppCompatActivity{
             }
         });
 
-        /*myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Toast.makeText(getApplicationContext(), "Valor "+value,Toast.LENGTH_LONG).show();
-            }
+        setUpFirebaseListener();
 
+        mout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Toast.makeText(getApplicationContext(), "Error ",Toast.LENGTH_LONG).show();
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
             }
-        });*/
+        });
     }
 
+    private void setUpFirebaseListener(){
+        mAuth = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null){
+                }else{
+                    Toast.makeText(getApplicationContext(), "cerrando sesion", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+            }
+        };
+    }
+
+    public void onStart(){
+        super.onStart();
+            FirebaseAuth.getInstance().addAuthStateListener(mAuth);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+            if (mAuth != null){
+                FirebaseAuth.getInstance().removeAuthStateListener(mAuth);
+            }
+    }
 }
