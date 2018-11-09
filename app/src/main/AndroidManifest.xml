@@ -40,7 +40,13 @@
         <activity android:name=".Principal" />
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".parentLayout"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_parent_layout"
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".parentView"></activity>
     </application>
 
 </manifest>
