@@ -11,46 +11,35 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/usuario"
-        android:layout_gravity="center"
-        />
-
-    <EditText
-        android:id="@+id/editTextEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Correo"
-        android:textColorHint="@android:color/white"
-        android:textColor="@android:color/white"
-        android:inputType="textEmailAddress"
-        />
-
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:textColorHint="@android:color/white"
-        android:textColor="@android:color/white"
-        android:inputType="textPassword"
-        />
-
-    <Button
-        android:id="@+id/btn-sesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Iniciar Sesion"
+        android:src="@drawable/logo"
         android:layout_gravity="center"
         />
 
     <TextView
-        android:id="@+id/tv-registrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:text="Registrar"
+        android:text="Elija su tipo de Usuario"
         android:textColor="@android:color/white"
-        android:textSize="20sp" />
+        android:textSize="20sp"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/conductor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Conductor"
+        android:layout_gravity="center"
+        />
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/padre_familia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Padre de Familia"
+        android:layout_gravity="center"
+        />
 
 </LinearLayout>

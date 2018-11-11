@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.eddie.uber_school.Objetos.References;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -50,10 +52,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent inew = getIntent();
         Bundle b = inew.getExtras();
         final String nombre = (String) b.get("NOMBRE");
+        Log.d("fbefje", nombre);
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        final Query query = ref.orderByChild("Alumno").equalTo(nombre);
 
-        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("alumnos/"+nombre);
-
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Double lat = dataSnapshot.child("Latitud").getValue(Double.class);

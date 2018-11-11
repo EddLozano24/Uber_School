@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class Principal extends AppCompatActivity{
     ArrayList<String> Arreglo =new ArrayList<>();
 
     private FirebaseAuth.AuthStateListener mAuth;
+    FirebaseAuth esta;
 
     private Button mout;
 
@@ -38,7 +41,8 @@ public class Principal extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child(References.REFERENCIA);
+        final Query myRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        final Query query = myRef.orderByChild("Activo").equalTo(1);
 
         mout = (Button) findViewById(R.id.logout);
 
@@ -47,23 +51,23 @@ public class Principal extends AppCompatActivity{
         Lista.setAdapter(adapter);
         //Lista.setOnItemClickListener(this);
 
-        myRef.addChildEventListener(new ChildEventListener() {
+        query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                final String name = dataSnapshot.getKey();
+                final String name = dataSnapshot.child("Alumno").getValue().toString();
+                Log.d("fbefje", name);
                 Arreglo.add(name);
                 adapter.notifyDataSetChanged();
                 Lista.setAdapter(adapter);
-
                 Lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         final String referencia = (String) Lista.getItemAtPosition(position).toString();
                         Intent intentextras = new Intent(Principal.this, MapsActivity.class);
                         intentextras.putExtra("NOMBRE", referencia);
+                        Log.d("ererf", referencia);
                         startActivity(intentextras);
-                    }
-                });
+                    }});
             }
 
             @Override
@@ -105,7 +109,7 @@ public class Principal extends AppCompatActivity{
                 if (user != null){
                 }else{
                     Toast.makeText(getApplicationContext(), "cerrando sesion", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), Login_Conductor.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
