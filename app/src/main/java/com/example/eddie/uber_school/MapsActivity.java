@@ -2,6 +2,7 @@ package com.example.eddie.uber_school;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,18 +54,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent inew = getIntent();
         Bundle b = inew.getExtras();
         final String nombre = (String) b.get("NOMBRE");
-        Log.d("fbefje", nombre);
+        Log.d("alo", nombre);
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         final Query query = ref.orderByChild("Alumno").equalTo(nombre);
+        Log.d("alo", String.valueOf(query));
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Double lat = dataSnapshot.child("Latitud").getValue(Double.class);
-                Double lon = dataSnapshot.child("Longitud").getValue(Double.class);
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Double lat = (Double) dataSnapshot.child("Latitud").getValue();
+                Log.d("lat", lat.toString());
+                Double lon = (Double) dataSnapshot.child("Longitud").getValue();
+                Log.d("lon", lon.toString());
                 LatLng sydney = new LatLng(lat, lon);
                 mMap.addMarker(new MarkerOptions().position(sydney).title("Ubicacion de "+nombre));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override
