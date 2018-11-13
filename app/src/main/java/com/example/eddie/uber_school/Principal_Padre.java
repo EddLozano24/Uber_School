@@ -53,7 +53,10 @@ public class Principal_Padre extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(Principal_Padre.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                startActivity(new Intent(Principal_Padre.this, Maps_Alumnos.class));
+
+                /*if (ActivityCompat.checkSelfPermission(Principal_Padre.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
                 client.getLastLocation().addOnSuccessListener(Principal_Padre.this, new OnSuccessListener<Location>() {
@@ -70,7 +73,7 @@ public class Principal_Padre extends AppCompatActivity {
                             Toast.makeText(Principal_Padre.this, "No se pudo", Toast.LENGTH_SHORT).show();
                         }
                     }
-                });
+                });*/
             }
         });
 
@@ -113,7 +116,7 @@ public class Principal_Padre extends AppCompatActivity {
                 if (user != null) {
                 } else {
                     Toast.makeText(getApplicationContext(), "cerrando sesion", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), Login_Padre.class);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
